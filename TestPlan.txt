@@ -1,0 +1,60 @@
+Stanley Chu
+Arturo Corro
+
+TestPlan ASST4
+---------------------
+The following test case plans are meant to test the evaluation of the program. Here every test case is described in detail about the sucess of each function.
+
+Test case 1 (the birth of a client/BankServer): 
+Test case 1 will be the simplest test of the program to see if the -attempting to connect- works fine. In this test case we just run EITHER ./client localhost<portnumber> or ./bankserver <portnumber> alone. If sucessful, the program will
+print out: "waiting to connect........" and is designated a sleep period of every 2 secs before refreshing again.
+
+Test case 2 (a Sucessful Link):
+Test case 2 will be a test to simply run both clients at the same time. We should input ./client localhost <portnumber> on one terminal and ./bankserver <same portnumber> on the other. Upon sucess, this test will make sure that the two
+clients are sucessful in link and passes the basic check. 
+Success would include : both clients being accepted with a "bind sucessful"
+Client: "you are connected to the server"
+Bankserver: "Client X has connected, connection was assigned to a thread"
+
+
+Test case 3 (Lets open an account):
+Test case 3 beings the first complex part of the program which is, after connection, the user is creating an account with the inputed name of their choice on the client through the bankserver. Since the accounts in the bank are done
+in an array/linked list style with its respective data, all the user needs to do is input in the client side: open <name of account>. The output from the bank side will be "Success!" Otherwise if the name is too long 100 characters 
+or if the name is alrelady taken, the server will return "name already taken".
+
+Test case 4 (Lets start a session!):
+Test case 4 is here to just print out the details of any account we created but more importantly to set up for a credit and debit action that is to proceed. This print statement is just to see/view the accounts data that 
+currently exsist inside the bank. whether its before insertion or after deletion, it will print out the most newly updated account data that the user names and sets you up. 
+
+Test case 5 (Credit a certain amount):
+Test case 5 is here to test if the credit function of adding funds sucessfully into the designated account is appropriate. in this test case we go through start accoountname sessions first and then credit <certainamount> and the funds should
+be transferred onto the account respectively. Example: Credit 100
+Output: 100+ <original balance>
+
+Test case 6 (debit a certain amount):
+Test case 6 is here to test if the debit function of subtracting funds out of the given account works fine. It has the same logic as the credit function but with one extra uniqueness. When too much debit is being pulled out of the account
+the bank server will not allow money to get out, and instead will return "insufficient funds". Also if the account has 0 credits and user tries to debit money out, it will still return "insufficient funds".
+
+Test case 7 (balance total):
+Test case 7 is fairly easy in that the user can ask Balance, and the bank server will return the current amount of credits inside of the given name account.
+Example: balance account110
+Output: Account110 has 67 credits
+
+Test case 8 (end session):
+We can test this by going in through test case 4 first to start a session. Once Test case 4 succeeds we can then enter "finish" into the client side and it will allow the bank server to disconnect from the current account we are working on.
+The server connection between client and bank is still maintained however as more accounts can be accessed.
+Example: finish account101
+Output: please input a command (back to main lobby)
+
+Test case 9 (exit):
+test case 9 will be used to simply exit the program all together and stop the connection between bank and server.
+input: exit
+output: User has disconnected.
+
+Test case 10 (going above and beyond):
+This test case 10 is to test out that if both client and server is connected, if we disconnect server of bank side, 
+Expected output: bank is disconnected and client also gets disconnected.
+
+If both client and server is connected, if we disconnect only client side, 
+Expected output: bankserver says "client 1 disconnected" while bank maintains operation
+		  Client is disconnected however.

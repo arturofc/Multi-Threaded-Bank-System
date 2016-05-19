@@ -1,0 +1,202 @@
+Stanley Chu
+Arturo Corro
+
+Test Cases for the Program Bank System.
+
+Test Case 1: Starting the Server
+------------------------------------------
+
+Input:
+      ./client localhost 1699
+
+Expected Output: 
+		Waiting to connect....
+		
+Note* every 2 secs delay of reconnect.
+
+Test Case 2: Link Establishment
+------------------------------------------
+
+
+Input:
+      clientTerminal: ./client localhost 1699 
+      bankserver: ./bankserver 1699
+
+Expected Output: 
+
+		clientTerminal: You are connected to the server
+		       -----------Welcome to Bank ------------------
+		       Input command: 'open' an account, 'start' an account. 'exit' to Disconnect.
+
+		serverTerminal: Client 1 has connected
+
+Test Case 3: Open an account
+------------------------------------------
+
+Precondition: assuming server and client are already connected and working fine.
+
+Input: 
+
+      clientTerminal: open account1
+
+Expected Output:
+
+		serverTerminal: account created: account1 done.
+
+
+Test Case 3.5: Open another account is the original still there?
+------------------------------------------
+
+Precondition: assuming We just ran Test Case 3
+
+Input:
+
+      client Terminal: open account1
+		       open account2
+
+Expected Output:
+
+		serverTerminal: account created: account1 account2 done.
+
+Note* account 1 was already created in Test case 3 and the expected output did not duplicate account1.
+
+Test Case 4: Session begin
+------------------------------------------
+
+Precondition: assuming we already have account1 opened from before
+
+Input: 
+
+      clientTerminal: start account1
+
+Expected output:
+
+	      clientTerminal: Input Command: 'credit' an amount, 'debit' an amount, 'finish' to end session,  'Exit' to Disconnect.
+
+Note* session begins and a new prompt appears to allow debit credit or finish to leave
+
+Test Case 4.5: Session can we open in session?
+------------------------------------------
+
+Precondition: continuing from Test Case 4 Session started already
+
+Input: 
+
+      clientTerminal: open stan
+
+Expected output:
+
+		clientTerminal: you cannot open an account while in session
+
+Note* returns you back to prompt to either credit, debit or leave/finish
+
+Test Case 5: credit balance
+------------------------------------------
+
+Precondition: assuming we already opened account1 and we started account1 session
+
+Input: 
+
+      clientTerminal: credit 500
+
+Expected output:
+
+		clientTerminal: Credits added sucessfully
+		serverTerminal: <existing balance> + 500
+
+Test Case 6: debit balance
+-----------------------------------------
+
+Precondition: assuming we already opened account1 and we started account1 session
+
+Input: 
+
+      clientTerminal: debit 500
+
+Expected output:
+
+		clientTerminal: Debits subtracted sucessfully
+		serverTerminal: <existing balance> - 500
+
+Note* assuming that existing balance is not 0 or lower and after subtracting 500 it does not go under 0
+
+Test Case 6.5 debit balance error check
+----------------------------------------
+
+Precondition: assuming we already opened account 1 and we started account 1 session with balance of 0
+
+Input: 
+
+      clientTerminal: debit 500
+
+Expected Output:
+
+		clientTerminal: Not enough funds to Debit!
+		serverTerminal: <existing balance> - 500 < 0
+
+Note* this is here to capture the fact that user is trying to take out too much money or that the account does not have neough to take output
+
+Test Case 7: Balance
+----------------------------------------
+
+Precondition: User has already created account1, credited funds and debitted funds already and finished session
+
+Input: 
+
+      clientTerminal: balance
+
+Expected output:
+
+		clientTerminal: user balance is: 100
+
+Test Case 8: Finish session
+---------------------------------------
+
+Precondition: User has already created account1, credited/debit funds and is about to exit session
+
+Input:
+
+      clientTerminal: finished
+
+Expected output:
+
+		clientTerminal: Exit Session (x)
+
+Test Case 9: Exit
+---------------------------------------
+
+Precondition: User is doing something inside client after connection
+
+Input: 
+
+      clientTerminal: Exit
+
+Expected Output: Disconnection Confirmed.
+
+Testcase 10: going above and beyond
+---------------------------------------
+
+Precondition: both client and bankserver is connected.
+
+Input: 
+	bankTerminal: Ctrl C
+
+Expected Output: 
+
+		bankTerminal: Disconnected
+      
+		clientTerminal: Disconnected
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
